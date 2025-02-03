@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: projeto-modulo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projeto-modulo
+  template:
+    metadata:
+      labels:
+        app: projeto-modulo
+    spec:
+      containers:
+      - name: app-container
+        image: schwendler/embarque-ti-spd-project
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPD_KEY_VAULT_URI
+          value: "https://kv-projeto-modulo.vault.azure.net/" # URI do Key Vault
